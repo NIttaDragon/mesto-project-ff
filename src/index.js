@@ -27,9 +27,9 @@ function handleEditFormSubmit(evt) {
 function handleNewCardFormSubmit(evt) {
   evt.preventDefault();
   const cardElement = createCard(formNewCard.elements['place-name'].value, formNewCard.elements.link.value, openPopup); 
+  placesList.prepend(cardElement);
   formNewCard.elements['place-name'].value = '';
   formNewCard.elements.link.value = '';
-  placesList.prepend(cardElement);
   closePopup(newCardPopap);
 }
 
