@@ -16,9 +16,6 @@ function escClosePopup(event) {
 
 //функция выхода из попапа на overlay
 function overlayClosePopup(event) {
-  /*if (!event.target.classList.contains('popup__content')){
-    closePopup(event.target);
-  }*/
   if (event.target === event.currentTarget || event.target.classList.contains('popup__close')) {
     closePopup(event.currentTarget)
   }
@@ -29,10 +26,6 @@ function openPopup(popupElement) {
   popupElement.classList.add('popup_is-opened');
   document.addEventListener('keydown', escClosePopup);
   popupElement.addEventListener('click', overlayClosePopup);
-  /*const closePopapButton = popupElement.querySelector('.popup__close');
-  closePopapButton.addEventListener('click', function (){
-    closePopup(popupElement);
-  });*/
 }
 
 //функция закрытия попапа
