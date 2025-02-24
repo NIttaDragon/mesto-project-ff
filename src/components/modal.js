@@ -7,22 +7,20 @@ const newCardPopap = document.querySelector('.popup_type_new-card');
 //приближение карточки
 const imagePopap = document.querySelector('.popup_type_image');
 
-//добавление поавности попапам
-imagePopap.classList.add('popup_is-animated');
-editPopap.classList.add('popup_is-animated');
-newCardPopap.classList.add('popup_is-animated');
-
 //функция выхода из попапа на Esc
 function escClosePopup(event) {
-  if (event.key === 'Escape' || event.keyCode === 27){
+  if (event.key === 'Escape'){
     closePopup(document.querySelector('.popup_is-opened'));
   }
 }
 
 //функция выхода из попапа на overlay
 function overlayClosePopup(event) {
-  if (!event.target.classList.contains('popup__content')){
+  /*if (!event.target.classList.contains('popup__content')){
     closePopup(event.target);
+  }*/
+  if (event.target === event.currentTarget || event.target.classList.contains('popup__close')) {
+    closePopup(event.currentTarget)
   }
 }
 
@@ -31,10 +29,10 @@ function openPopup(popupElement) {
   popupElement.classList.add('popup_is-opened');
   document.addEventListener('keydown', escClosePopup);
   popupElement.addEventListener('click', overlayClosePopup);
-  const closePopapButton = popupElement.querySelector('.popup__close');
+  /*const closePopapButton = popupElement.querySelector('.popup__close');
   closePopapButton.addEventListener('click', function (){
     closePopup(popupElement);
-  });
+  });*/
 }
 
 //функция закрытия попапа

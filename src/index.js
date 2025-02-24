@@ -1,6 +1,7 @@
+import './pages/index.css';
 import { initialCards } from './cards';
-import { createCard } from './components/card';
-import { editPopap, newCardPopap, closePopup, openPopup } from './components/modal';
+import { deleteCard, likeCard, createCard } from './components/card';
+import { imagePopap, editPopap, newCardPopap, closePopup, openPopup } from './components/modal';
 
 //место для карточек
 const placesList = document.querySelector('.places__list');
@@ -15,6 +16,11 @@ const profileDescription = document.querySelector('.profile__description');
 const newCardButton = document.querySelector('.profile__add-button');
 const formNewCard = document.forms['new-place'];
 
+//добавление поавности попапам
+imagePopap.classList.add('popup_is-animated');
+editPopap.classList.add('popup_is-animated');
+newCardPopap.classList.add('popup_is-animated');
+
 //запись данных профиля
 function handleEditFormSubmit(evt) {
   evt.preventDefault(); 
@@ -26,16 +32,22 @@ function handleEditFormSubmit(evt) {
 //создание новой карточки поо кнопке
 function handleNewCardFormSubmit(evt) {
   evt.preventDefault();
-  const cardElement = createCard(formNewCard.elements['place-name'].value, formNewCard.elements.link.value, openPopup); 
+  const cardElement = createCard(formNewCard.elements['place-name'].value, formNewCard.elements.link.value, deleteCard, likeCard, openImagePopup); 
   placesList.prepend(cardElement);
-  formNewCard.elements['place-name'].value = '';
-  formNewCard.elements.link.value = '';
+  formNewCard.reset();
   closePopup(newCardPopap);
+}
+
+function openImagePopup(imagePopap, img, name) {
+  openPopup(imagePopap);
+    imagePopap.querySelector('.popup__image').src = img;
+    imagePopap.querySelector('.popup__image').alt = name;
+    imagePopap.querySelector('.popup__caption').textContent = name;
 }
 
 //создание и вставка начальных карточек на экран
 initialCards.forEach(function(elem) {
-  const cardElement = createCard(elem.name, elem.link, openPopup);
+  const cardElement = createCard(elem.name, elem.link, deleteCard, likeCard, openImagePopup);
   placesList.append(cardElement);
 })
 
@@ -56,5 +68,4 @@ formEdit.addEventListener('submit', handleEditFormSubmit);
 //кнопка добавления карточки
 formNewCard.addEventListener('submit', handleNewCardFormSubmit);
 
-
-import './pages/index.css';
+//export {openImagePopup /*as openImagePopupFunction*/};
