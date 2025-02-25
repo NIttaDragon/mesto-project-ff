@@ -1,6 +1,3 @@
-import { imagePopap/*, openPopup*/ } from "./modal";
-//import { openImagePopup/*Function*/ } from "..";
-
 //функция удаления карточки
 function deleteCard(element) {
   element.remove()
@@ -23,7 +20,7 @@ function createCard(name, img, deleteCardFunction, likeCardFunction, openImagePo
   });
   cardElement.querySelector('.card__like-button').addEventListener('click', likeCardFunction);
   cardElement.querySelector('.card__image').addEventListener('click', function(){
-    openImagePopupFunction(imagePopap, img, name)
+    openImagePopupFunction(img, name)
   });
   return cardElement;
 }

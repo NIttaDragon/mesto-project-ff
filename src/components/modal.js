@@ -1,12 +1,3 @@
-//редактирование профиля
-const editPopap = document.querySelector('.popup_type_edit');
-
-//добавление новых карточек
-const newCardPopap = document.querySelector('.popup_type_new-card');
-
-//приближение карточки
-const imagePopap = document.querySelector('.popup_type_image');
-
 //функция выхода из попапа на Esc
 function escClosePopup(event) {
   if (event.key === 'Escape'){
@@ -35,4 +26,4 @@ function closePopup(popupElement) {
   popupElement.removeEventListener('click', overlayClosePopup);
 }
 
-export {imagePopap, editPopap, newCardPopap, closePopup, openPopup};
+export { closePopup, openPopup };

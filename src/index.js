@@ -1,20 +1,25 @@
 import './pages/index.css';
 import { initialCards } from './cards';
 import { deleteCard, likeCard, createCard } from './components/card';
-import { imagePopap, editPopap, newCardPopap, closePopup, openPopup } from './components/modal';
+import { closePopup, openPopup } from './components/modal';
 
 //место для карточек
 const placesList = document.querySelector('.places__list');
 
 //редактирование профиля
+const editPopap = document.querySelector('.popup_type_edit');
 const editButton = document.querySelector('.profile__edit-button');
 const formEdit = document.forms['edit-profile'];
 const profileTitle = document.querySelector('.profile__title');
 const profileDescription = document.querySelector('.profile__description');
 
 //добавление новых карточек
+const newCardPopap = document.querySelector('.popup_type_new-card');
 const newCardButton = document.querySelector('.profile__add-button');
 const formNewCard = document.forms['new-place'];
+
+//приближение карточки
+const imagePopap = document.querySelector('.popup_type_image');
 
 //добавление поавности попапам
 imagePopap.classList.add('popup_is-animated');
@@ -38,7 +43,7 @@ function handleNewCardFormSubmit(evt) {
   closePopup(newCardPopap);
 }
 
-function openImagePopup(imagePopap, img, name) {
+function openImagePopup(img, name) {
   openPopup(imagePopap);
     imagePopap.querySelector('.popup__image').src = img;
     imagePopap.querySelector('.popup__image').alt = name;
@@ -68,4 +73,4 @@ formEdit.addEventListener('submit', handleEditFormSubmit);
 //кнопка добавления карточки
 formNewCard.addEventListener('submit', handleNewCardFormSubmit);
 
-//export {openImagePopup /*as openImagePopupFunction*/};
+export {imagePopap, editPopap, newCardPopap};
