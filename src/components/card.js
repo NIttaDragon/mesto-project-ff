@@ -11,7 +11,6 @@ function deleteCard(element, cardId) {
       element.remove();
     })
     .catch((err) => {
-      alert('Не удалось удалить карточку');
       console.error('Не удалось удалить карточку: '+ err);
     });
     closePopup(deleteCardPopup);
@@ -29,7 +28,6 @@ function likeCard(event, cardId){
       event.target.closest('.like-wrapper').querySelector('.like-number').textContent = response.likes.length;
     })
     .catch((err) => {
-      alert('Не удалось поставить лайк');
       console.error('Не удалось поставить лайк: '+ err);
     });
   } else {
@@ -41,7 +39,6 @@ function likeCard(event, cardId){
       event.target.closest('.like-wrapper').querySelector('.like-number').textContent = response.likes.length;
     })
     .catch((err) => {
-      alert('Не удалось отменить лайк');
       console.error('Не удалось отменить лайк: '+ err);
     });
   }

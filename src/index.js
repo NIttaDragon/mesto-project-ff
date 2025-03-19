@@ -89,7 +89,6 @@ function handleEditFormSubmit(evt) {
       evt.target.querySelector('.popup__button').textContent = 'Сохранено';
     })
     .catch((err) => {
-      alert('Не удалось изменить данные профиля');
       console.error('Не удалось изменить данные профиля: '+ err);
     });
   closePopup(editPopup);
@@ -108,7 +107,6 @@ function handleNewCardFormSubmit(evt) {
     evt.target.querySelector('.popup__button').textContent = 'Сохранено';
   })
   .catch((err) => {
-    alert('Не удалось создать новую карточку');
     console.error('Не удалось создать новую карточку: '+ err);
   });
   formNewCard.reset();
@@ -126,7 +124,6 @@ function handleAvatarEditFormSubmit(evt) {
     evt.target.querySelector('.popup__button').textContent = 'Сохранено';
   })
   .catch((err) => {
-    alert('Не удалось изменить фото профиля');
     console.error('Не удалось изменить фото профиля: '+ err);
   });
   avatarForm.reset();
@@ -176,7 +173,6 @@ formNewCard.addEventListener('submit', handleNewCardFormSubmit);
 avatarEdit.addEventListener('click', function() {
   avatarChangePopup.querySelector('.popup__button').textContent = 'Сохранить';
   openPopup(avatarChangePopup);
-  
 })
 
 avatarForm.addEventListener('submit', handleAvatarEditFormSubmit);
