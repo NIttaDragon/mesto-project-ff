@@ -7,6 +7,31 @@
   background-size: cover;
   background-position: center;
   margin: 0 29px 0 0;
+  position: relative;
+}
+
+.avatar_edit {
+  position:absolute;
+  z-index: 2;
+  width: 100%;
+  height: 100%;
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  border-radius: 50%;
+  cursor: pointer;
+  -webkit-transition: 0.3s;
+  -moz-transition: 0.3s;
+  -ms-transition: 0.3s;
+  -o-transition: 0.3s;
+  transition: 0.3s;
+  background: transparent url('../../../images/edit-icon.svg') center no-repeat;
+  background-color: rgba(0, 0, 0, 0.8);
+  background-size: 26px 26px;
+  opacity: 0;
+}
+
+.avatar_edit:hover {
+  opacity: 0.8;
 }
 
 @media screen and (max-width: 740px) {
