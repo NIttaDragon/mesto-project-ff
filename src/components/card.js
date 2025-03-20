@@ -65,7 +65,7 @@ function createCard(elem, deleteCardFunction, likeCardFunction, openImagePopupFu
     likeCardFunction(evt, elem._id)
   });
   cardElement.querySelector('.card__image').addEventListener('click', function(){
-    openImagePopupFunction(img, elem.name)
+    openImagePopupFunction(elem.link, elem.name)
   });
   return cardElement;
 }
