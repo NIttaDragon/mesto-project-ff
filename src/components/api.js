@@ -2,39 +2,29 @@ const API_URL = 'https://nomoreparties.co/v1/wff-cohort-34';
 const API_TOKEN = 'bfe454f8-6d39-448e-b633-be779ce273e8';
 
 //получение данных профиля
-const profileData = function() {
+const getProfileData = function() {
   return (
     fetch(`${API_URL}/users/me`, {
       headers: {
         authorization: API_TOKEN
       }
-    }).then(res => {
-      if(res.ok){
-        return res.json();
-      }
-      return Promise.reject(`Ошибка: ${res.status}`);
-    })
+    }).then(res => handleResponse(res))
   )
 }
 
 //получение карточек с сервера
-const cardsData = function() {
+const getCardsData = function() {
   return(
     fetch(`${API_URL}/cards`, {
       headers: {
         authorization: API_TOKEN
       }
-    }).then(res => {
-      if(res.ok){
-        return res.json();
-      }
-      return Promise.reject(`Ошибка: ${res.status}`);
-    })
+    }).then(res => handleResponse(res))
   )
 }
 
 //отправка новых данных профиля
-const newProfileData = function(newTitle, newDescription){
+const setNewProfileData = function(newTitle, newDescription){
   return(
     fetch(`${API_URL}/users/me`, {
       method: 'PATCH',
@@ -46,17 +36,12 @@ const newProfileData = function(newTitle, newDescription){
         name: newTitle,
         about: newDescription
       })
-    }).then(res => {
-      if(res.ok){
-        return res.json();
-      }
-      return Promise.reject(`Ошибка: ${res.status}`);
-    })
+    }).then(res => handleResponse(res))
   )
 }
 
 //отправка данных новой карточки
-const newCardData = function(cardName, cardLink){
+const postNewCardData = function(cardName, cardLink){
   return(
     fetch(`${API_URL}/cards`, {
       method: 'POST',
@@ -68,17 +53,12 @@ const newCardData = function(cardName, cardLink){
         name: cardName,
         link: cardLink
       })
-    }).then(res => {
-      if(res.ok){
-        return res.json();
-      }
-      return Promise.reject(`Ошибка: ${res.status}`);
-    })
+    }).then(res => handleResponse(res))
   );
 }
 
 //изменение аватара
-const newAvatarData = function(avatarLink){
+const setNewAvatarData = function(avatarLink){
   return(
     fetch(`${API_URL}/users/me/avatar`, {
       method: 'PATCH',
@@ -89,12 +69,7 @@ const newAvatarData = function(avatarLink){
       body: JSON.stringify({
         avatar: avatarLink
       })
-    }).then(res => {
-      if(res.ok){
-        return res.json();
-      }
-      return Promise.reject(`Ошибка: ${res.status}`);
-    })
+    }).then(res => handleResponse(res))
   )
 }
 
@@ -106,67 +81,28 @@ const deleteCardData = function(cardId){
       headers: {
         authorization: API_TOKEN
       }
-    }).then(res => {
-      if(res.ok){
-        return res.json();
-      }
-      return Promise.reject(`Ошибка: ${res.status}`);
-    })
+    }).then(res => handleResponse(res))
   )
 }
-
-/*//поставить лайк
-const likeData = function(cardId){
-  return(
-    fetch(`${API_URL}/cards/likes/${cardId}`, {
-      method: 'PUT',
-      headers: {
-        authorization: API_TOKEN
-      }
-    }).then(res => {
-      if(res.ok){
-        return res.json();
-      }
-      return Promise.reject(`Ошибка: ${res.status}`);
-    })
-  )
-}
-
-//убрать лайк
-const unlikeData = function(cardId){
-  return(
-    fetch(`${API_URL}/cards/likes/${cardId}`, {
-      method: 'DELETE',
-      headers: {
-        authorization: API_TOKEN
-      }
-    }).then(res => {
-      if(res.ok){
-        return res.json();
-      }
-      return Promise.reject(`Ошибка: ${res.status}`);
-    })
-  )
-}*/
 
 //изменение значение лайка
-const setLikeData = function(methodType, cardId){
+const setLikeData = function(likeStatus, cardId){
   return(
     fetch(`${API_URL}/cards/likes/${cardId}`, {
-      method: methodType,
+      method: likeStatus ? 'PUT' : 'DELETE',
       headers: {
         authorization: API_TOKEN
       }
-    }).then(res => {
-      if(res.ok){
-        return res.json();
-      }
-      return Promise.reject(`Ошибка: ${res.status}`);
-    })
+    }).then(res => handleResponse(res))
   )
 }
-//не знаю, можно ли было объеденить запросы, поэтому старый вариант не удаляла
 
+//обработка результата запроса
+function handleResponse(res){
+  if (res.ok) {
+    return res.json();
+  }
+  return Promise.reject(`Ошибка: ${res.status}`);
+}
 
-
-export {profileData, cardsData, newProfileData, newCardData, newAvatarData, deleteCardData, /*likeData, unlikeData,*/ setLikeData}
+export {getProfileData, getCardsData, setNewProfileData, postNewCardData, setNewAvatarData, deleteCardData, setLikeData}

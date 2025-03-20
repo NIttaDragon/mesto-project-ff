@@ -23,12 +23,8 @@ function setFormEventListeners(formName, inputSelector, submitButtonSelector, in
 }
 
 //управление доступностью кнопки
-const toggleButtonState = (inputList, buttonElement) => {
-  if (hasInvalidInput(inputList)) {
-    buttonElement.disabled = true;
-  } else {
-    buttonElement.disabled = false;
-  }
+const toggleButtonState = (inputList, buttonElement) => { 
+  buttonElement.disabled = hasInvalidInput(inputList);
 }
 
 //проверка валидности всей формы
